@@ -1,0 +1,36 @@
+
+.ia-create-ad-button {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  height: 60px;
+  width: 60px;
+
+  outline: none;
+  background: url('../images/plus.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  border-radius: 50%;
+  border: 1px solid white;
+  box-shadow: 0 0 10px 0 white;
+}
+
+.ia-create-ad-button:active {
+  background-size: 115% 115%;
+}
+
+.ia-create-ad-form {
+  min-width: 280px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+}
+
+.ia-create-ad-form__single-field {
+  width: 100%;
+}
+
+.ia-create-ad-form__title {
+  font-size: 16px;
+}

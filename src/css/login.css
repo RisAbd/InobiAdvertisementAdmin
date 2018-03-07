@@ -1,0 +1,41 @@
+
+.ia-login-form {
+  align-items: center;
+  position: relative;
+  width: 20rem;
+  height: 5rem;
+
+  border-radius: 5px;
+  box-shadow: 3px 3px 4px #cccccc;
+  border: 3px solid #dddddd;
+  background-color: rgba(50, 197, 288, 1)
+}
+
+.ia-login-form__text-input {
+  width: 12rem;
+  margin: auto;
+  margin-top: 0.8rem;
+  padding: 3px;
+
+  border: 1px solid #888888;
+  display: block;
+}
+
+.ia-login-form__text-input textarea {
+  font-size: 16px;
+  background-color: rgba(200, 240, 255, 1);
+}
+
+.ia-login-form__text-input, textarea:-moz-placeholder { color: red; }
+.ia-login-form__text-input, textarea:::webkit-input-placeholder { color: red; }
+.ia-login-form__submit-input {
+  background-color: rgba(0, 100, 100, 1);
+  padding: 5px;
+  border-radius: 3px;
+  color: white;
+  border: 0px;
+  margin: auto;
+  width: 8rem;
+  display: block;
+  margin-top: 0.4rem;
+}

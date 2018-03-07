@@ -1,0 +1,65 @@
+.ia-lock {
+  overflow: hidden;
+}
+
+.ia-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+
+  padding: 15px;
+  z-index: 101;
+
+  background-color: #0093ee;
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
+.ia-modal-shim:first-child {
+  border-radius: 0px;
+}
+
+.ia-modal-shim {
+  border-radius: 10px;
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translateZ(0px);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
+  zoom: 1;
+
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.ia-modal__close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 15px;
+  height: 15px;
+
+  outline: none;
+  background: url('../images/modal-close-thin.svg') center no-repeat;
+  background-size: 100% 100%;
+  border: 0px solid white;
+}
+
+.ia-modal__close-button:active {
+  background-size: 90% 90%;
+}
+
+.ia-modal__title {
+  margin-top: 10px;
+  margin-bottom: 8px;
+  color: white;
+}

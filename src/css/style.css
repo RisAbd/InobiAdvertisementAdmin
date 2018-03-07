@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+@keyframes spinnerAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+body {
+  background-color: rgb(154, 209, 242);
+}
+
+html, body, #app,
+.ia-match-parent {
+  font-family: 'Roboto', sans-serif;
+
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+}
+
+.ia-react-root {
+  overflow-y: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.ia-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ia-loading-shim {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(255,255,255, 0.4);
+}
+
+.ia-spinner {
+  flex-grow: 0;
+  width: 100px;
+  height: 100px;
+}
+
+.ia-spinner__image {
+  animation: spinnerAnimation 1s linear infinite;
+  width: 100%;
+  height: 100%;
+}
+
+.ia-ad:hover,
+.ia-navbar__button:hover,
+.ia-navbar__logo:hover {
+  box-shadow: 0 0 5px 1px rgb(50, 197, 255);
+}
+
+.ia-tab {
+  display: flex;
+  flex-grow: 2;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  flex-basis: auto;
+
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+
+  overflow-y: auto;
+
+  background-color: #d1ecfd;
+}

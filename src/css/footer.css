@@ -1,0 +1,7 @@
+.ia-footer {
+  height: 15px;
+  flex-shrink: 0;
+
+  background-color: #09e;
+  box-shadow: 0 0 10px 0 white;
+}

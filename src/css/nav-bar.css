@@ -1,0 +1,92 @@
+
+.ia-navbar {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+
+  position: relative;
+
+  width: 100%;
+  margin: 0 auto;
+  z-index: 2;
+  background-color: rgba(0, 147, 238, 1);
+}
+
+.ia-navbar__content {
+
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  height: 3rem;
+  max-width: 1600px;
+  width: 100%;
+
+  box-shadow: 0 0 10px 0 white;
+  -moz-box-shadow: 0 0 10px 0 white;
+  -webkit-box-shadow: 0 0 10px 0 white;
+}
+
+@media print {
+  .ia-navbar {
+    display: none;
+  }
+}
+
+.ia-navbar__container--alignment-start,
+.ia-navbar__container--alignment-end {
+  padding: 0 10px;
+  display: flex;
+  align-items: stretch;
+}
+
+.ia-navbar__logo {
+  display: flex;
+  padding: 0.6rem 0.4rem;
+  margin-right: 5px;
+}
+
+.ia-navbar__logo:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.ia-navbar__logo-image {
+  object-fit: contain;
+  flex-grow: 2;
+  min-width: 80px;
+  max-width: 100px;
+}
+
+.ia-navbar__button {
+  display: flex;
+  align-content: center;
+  margin-top: 2px;
+  line-height: 30px;
+  padding: 0 8px;
+
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+.ia-navbar__button-text {
+  margin: auto;
+  font-size: 20px;
+}
+
+.ia-navbar__button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 137, 228, 1);
+}
+
+.ia-navbar__button--active {
+  margin-top: 0;
+
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 147, 238);
+}

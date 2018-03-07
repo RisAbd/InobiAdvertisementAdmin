@@ -1,0 +1,45 @@
+/* Message */
+
+.ia-message {
+  margin: 2px;
+  padding: 5px;
+
+  color: white;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid white;
+}
+
+.ia-message * {
+  margin: 2px;
+}
+
+.ia-message__title {
+  font-size: 16px;
+}
+
+.ia-message__subtitle {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ia-message__content {
+  font-size: 12px;
+  font-weight: 100;
+}
+
+
+/* Error Message */
+
+.ia-message--type-error {
+  background-color: rgba(255, 100, 100, 0.5);
+}
+
+.ia-message__subtitle--type-error {
+  color: red;
+}
+
+/* Success Message */
+
+.ia-message--type-success {
+  background-color: rgba(100, 255, 100, 0.7);
+}

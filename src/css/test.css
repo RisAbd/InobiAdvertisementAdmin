@@ -1,0 +1,7 @@
+
+.ia-test-tab {
+  flex-grow: 2;
+  flex-basis: auto;
+
+  background-color: rgb(200, 200, 255);
+}
