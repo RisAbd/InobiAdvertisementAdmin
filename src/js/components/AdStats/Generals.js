@@ -30,7 +30,7 @@ export default class Generals extends React.Component {
     //   ads.length === 0 ? '-' : unix(Math.min(...ads.map((ad, i) => ad.created))).format('DD.MM.YYYY HH:mm:ss'),
     // ];
     const DESCRIPTION_MAX_LENGTH = 45;
-    const description = ads.map((ad, i) => `${ad.description}`).join(', ');
+    const description = ads.filter(ad => (typeof ad.description === 'string')).map((ad, i) => `${ad.description}`).join(', ') || [''];
     const descriptionRow = [
       'Description', 
       ads.length === 0 ? '-' : (description.length > DESCRIPTION_MAX_LENGTH) ? (description.substr(0, DESCRIPTION_MAX_LENGTH) + '...') : description,
