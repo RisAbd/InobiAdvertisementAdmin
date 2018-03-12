@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Redirect } from 'react-router';
 
-import { addTranslation, initialize, setActiveLanguage } from 'react-localize-redux';
+import { addTranslation, getActiveLanguage, initialize, setActiveLanguage } from 'react-localize-redux';
 
 import store from './store.js';
 
@@ -30,10 +30,12 @@ const languages = [
 store.dispatch(initialize(languages, { defaultLanguage: 'en' }));
 store.dispatch(addTranslation(require('../translations.json')));
 
+const isLtr = getActiveLanguage(store.getState().locale).code !== 'fa';
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <div class='ia-react-root'>
+      <div class='ia-react-root' dir={isLtr ? 'ltr' : 'rtl'}>
         <NavBar />
         <Switch>
           <Route path='/login' component={ LoginChecker } />
