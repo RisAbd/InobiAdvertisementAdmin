@@ -1,64 +1,49 @@
 import './globals';
 import './styles.js';
 
-
-
-import './test';
-
-
-
 import React from 'react';
-
-
-
-import Ripple from './ripple/Ripple';
-
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Redirect } from 'react-router';
-import createHistory from 'history/createHashHistory';
+
+import { addTranslation, initialize, setActiveLanguage } from 'react-localize-redux';
 
 import store from './store.js';
 
 import NavBar from './components/Nav';
-import Footer from './components/Footer';
 
 import LoginChecker from './components/LoginCheckerLayout';
-import Map from './pages/Map';
 import Ads from './pages/Ads';
-import Views from './pages/Views';
-import BoxUpdates from './pages/BoxUpdates';
 import NoMatch from './pages/NoMatch';
 import Stats from './pages/Stats';
 
-import Test from './pages/Test';
-
 const tag = '@client.js:';
 
-
 const app = document.getElementById('app');
-const history = createHistory();
 
+const languages = [
+  { name: 'English', code: 'en' },
+  { name: 'Русский', code: 'ru' },
+  { name: 'فارْسِى', code: 'fa' },
+];
+store.dispatch(initialize(languages, { defaultLanguage: 'en' }));
+store.dispatch(addTranslation(require('../translations.json')));
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router>
       <div class='ia-react-root'>
         <NavBar />
         <Switch>
           <Route path='/login' component={ LoginChecker } />
           <Route path='/ads' component={ Ads } />
-          <Route path='/map' component={ Map } />
-          <Route path='/views' component={ Views } />
-          <Route path='/box_updates' component={ BoxUpdates } />
-          <Route path='/test' component={ Test } />
           <Route path='/stats' component={ Stats } />
 
-          <Route exact path='/' render={ 
-            () => <Redirect from='/' to={
-              store.getState().login.loggedIn ? '/stats' : '/login'
-            } /> 
+          <Route exact path='/' render={
+            () => <Redirect to={
+              store.getState().login.loggedIn ? '/ads' : '/login'
+            } />
           } />
 
           <Route component={ NoMatch } />
