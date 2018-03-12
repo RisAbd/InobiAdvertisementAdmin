@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { localeReducer as locale } from 'react-localize-redux';
 
 import test from './testReducer';
 import login from './loginReducer';
@@ -15,4 +16,5 @@ export default combineReducers({
   views,
   mediaLists,
   stats,
+  locale,
 });
