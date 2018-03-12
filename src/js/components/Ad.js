@@ -1,20 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getTranslate } from 'react-localize-redux';
 import { mapObject, jwtAsGetArg } from '../utils';
 
 import AdThumbnailImage from './AdThumbnailImage';
 
 import { disableAd } from '../actions/adsActions';
+import { Switch } from "./Switch";
 
 const tag = '@Ad:';
 
+const mapStateToProps = ({ locale }) => ({ translate: getTranslate(locale) });
 
-@connect(null)
+@connect(mapStateToProps, null)
 export default class Ad extends React.Component {
+  state = {
+    checked: false,
+  }
 
   onEnableButtonClick = (event) => {
     print(tag, 'enable button clicked');
+    this.setState({ checked: !this.state.checked });
   };
 
   onDeleteButtonClick = (event) => {
@@ -28,10 +35,10 @@ export default class Ad extends React.Component {
   };
 
   render() {
-    const { ad } = this.props;
+    const { ad, translate } = this.props;
     const created = new Date(ad.created*1000);
 
-    return <div class='ia-ad' title={ ad.id }>
+    return <div class='ia-ad'>
 
         <AdThumbnailImage src={ ad.source } type={ ad.type } />
 
@@ -43,32 +50,31 @@ export default class Ad extends React.Component {
               { ad.description ? <p>{ ad.description }</p> : null }
             </div>
             <div class='ia-ad__views-container'>
-              <p class='ia-ad__views-text'>Views: { ad.views }</p>
+              <p class='ia-ad__views-text'>{ translate('Ads.Card.views') }: { ad.views }</p>
               <p class='ia-ad__requests-text'>
-                Requests: { ad.requests }<br/>
-                Identifier: <span onClick={ this.onIdClick }>{ ad.id }</span>
+                { translate('Ads.Card.requests') }: { ad.requests }<br/>
+                {/*Identifier: <span onClick={ this.onIdClick }>{ ad.id }</span>*/}
               </p>
             </div>
           </div>
 
           <div class='ia-ad__info-right' style={ { flexFlow: 'row wrap' } }>
+            <div class='ia-ad__stuff-container'>
+              <p>{ translate('Ads.Card.created')}: { created.toLocaleDateString() }</p>
+              <p>{ translate('Ads.Card.redirect')}: { ad.redirect_url }</p>
+              <div class='ia-ad__iconed-stuff-text ia-ad__duration'>
+                <span class='ia-ad__iconed-stuff-text ia-ad__duration-text'>{ translate('Ads.Card.duration')}: { ad.duration }s</span>
+              </div>
+              <div class='ia-ad__iconed-stuff ia-ad__weight'>
+                <span class='ia-ad__iconed-stuff-text ia-ad__weight-text'>{ translate('Ads.Card.weight')}: { ad.weight }</span>
+              </div>
+            </div>
             <div class='ia-ad__enable-button' onClick={ this.onEnableButtonClick }>
               <img class='ia-ad__enable-image' src={`images/icons/ad_${ad.enabled ? 'enabled' : 'disabled'}2.svg`} />
             </div>
 
             <div class='ia-ad__enable-button' onClick={ this.onDeleteButtonClick }>
               <img class='ia-ad__enable-image' src={`images/modal-close-pink.svg`} />
-            </div>
-
-            <div class='ia-ad__stuff-container'>
-              <p>Created: { created.toLocaleDateString() }</p>
-              <p>Redirect: { ad.redirect_url }</p>
-              <div class='ia-ad__iconed-stuff-text ia-ad__duration'>
-                <span class='ia-ad__iconed-stuff-text ia-ad__duration-text'>Duration: { ad.duration }s</span>
-              </div>
-              <div class='ia-ad__iconed-stuff ia-ad__weight'>
-                <span class='ia-ad__iconed-stuff-text ia-ad__weight-text'>Weight: { ad.weight }</span>
-              </div>
             </div>
           </div>
 
