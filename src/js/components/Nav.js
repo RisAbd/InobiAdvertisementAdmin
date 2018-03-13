@@ -44,19 +44,19 @@ export default class NavBar extends React.Component {
           </Link>
           <Link to="/ads" class='ia-navbar__button' activeClassName='ia-navbar__button--active'>
             <span class='ia-navbar__button-text'>
-              { translate('Pages.Ads') }
+              { translate('Ads') }
             </span>
           </Link>
           <Link to="/stats" class='ia-navbar__button' activeClassName='ia-navbar__button--active'>
             <span class='ia-navbar__button-text'>
-              { translate('Pages.Stats') }
+              { translate('Stats') }
             </span>
           </Link>
         </div>
         <div class='ia-navbar__container--alignment-end'>
           <Link to='/login' activeClassName='' class='ia-navbar__button' onClick={this.logout}>
             <span class='ia-navbar__button-text'>
-              { translate('Auth.logout') }
+              { translate('logout') }
             </span>
           </Link>
         </div>

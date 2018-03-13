@@ -50,9 +50,9 @@ export default class Ad extends React.Component {
               { ad.description ? <p>{ ad.description }</p> : null }
             </div>
             <div class='ia-ad__views-container'>
-              <p class='ia-ad__views-text'>{ translate('Ads.Card.views') }: { ad.views }</p>
+              <p class='ia-ad__views-text'>{ translate('views') }: { ad.views }</p>
               <p class='ia-ad__requests-text'>
-                { translate('Ads.Card.requests') }: { ad.requests }<br/>
+                { translate('requests') }: { ad.requests }<br/>
                 {/*Identifier: <span onClick={ this.onIdClick }>{ ad.id }</span>*/}
               </p>
             </div>
@@ -60,13 +60,13 @@ export default class Ad extends React.Component {
 
           <div class='ia-ad__info-right' style={ { flexFlow: 'row wrap' } }>
             <div class='ia-ad__stuff-container'>
-              <p>{ translate('Ads.Card.created')}: { created.toLocaleDateString() }</p>
-              <p>{ translate('Ads.Card.redirect')}: { ad.redirect_url }</p>
+              <p>{ translate('created')}: { created.toLocaleDateString() }</p>
+              <p>{ translate('redirect')}: { ad.redirect_url }</p>
               <div class='ia-ad__iconed-stuff-text ia-ad__duration'>
-                <span class='ia-ad__iconed-stuff-text ia-ad__duration-text'>{ translate('Ads.Card.duration')}: { ad.duration }s</span>
+                <span class='ia-ad__iconed-stuff-text ia-ad__duration-text'>{ translate('duration')}: { ad.duration }s</span>
               </div>
               <div class='ia-ad__iconed-stuff ia-ad__weight'>
-                <span class='ia-ad__iconed-stuff-text ia-ad__weight-text'>{ translate('Ads.Card.weight')}: { ad.weight }</span>
+                <span class='ia-ad__iconed-stuff-text ia-ad__weight-text'>{ translate('weight')}: { ad.weight }</span>
               </div>
             </div>
             <div class='ia-ad__enable-button' onClick={ this.onEnableButtonClick }>

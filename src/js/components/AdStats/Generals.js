@@ -14,9 +14,8 @@ const tag = '@AdStats.Generals:'
 export default class Generals extends React.Component {
   render() {
 
-    const { request, redirect, translate: translateFn} = this.props;
+    const { request, redirect, translate } = this.props;
     const { found: ads, interval } = request;
-    const translate = str => translateFn(`Stats.Generals.${str}`);
 
     const namesRow = [
       translate('name'),
@@ -67,7 +66,7 @@ export default class Generals extends React.Component {
     ];
     const spans= [1, 1];
 
-    return <AdInfo title={translate('heading')} >
+    return <AdInfo title={translate('generals-heading')} >
       <Table rows={ rows } spans={ spans } />
     </AdInfo>;
   }

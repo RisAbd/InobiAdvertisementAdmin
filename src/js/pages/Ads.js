@@ -63,7 +63,7 @@ export default class Ads extends React.Component {
     const { isOnAdCreate } = this.state;
 
     return <div class={ 'ia-tab ia-ads-tab' + (isOnAdCreate ? ' ia-lock' : '') } >
-      <CreateAdModalView title={translate('Ads.Modal.modal-title')} isOpen={ isOnAdCreate }
+      <CreateAdModalView title={translate('ads-modal-title')} isOpen={ isOnAdCreate }
       onCloseClick={ this.onCreateAdClose } onAdCreated={ this.onAdCreated } />
       { adComponents }
       { ads.isFetching ? <Spinner centered height='100px' width='100px' /> : null }
