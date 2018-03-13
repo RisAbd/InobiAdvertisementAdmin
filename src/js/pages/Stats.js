@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import { getTranslate } from 'react-localize-redux';
 
 import ViewReport from '../components/AdStats/ViewReport';
 import Generals from '../components/AdStats/Generals';
@@ -26,8 +27,12 @@ import { pySet as set } from '../utils';
 
 const tag = '@StatsPage:';
 
+const mapStateToProps = ({ stats, locale }) => ({
+  stats,
+  translate: getTranslate(locale),
+});
 
-@connect((store) => ({stats: store.stats}))
+@connect(mapStateToProps)
 export default class Stats extends React.Component {
 
   componentWillMount() {
@@ -46,12 +51,14 @@ export default class Stats extends React.Component {
 
   render() {
 
-    const { stats } = this.props;
+    const { stats, translate } = this.props;
     const { fetched, fullscreen } = stats;
 
     const generals = <Generals
       request={ fetched ? stats.stats.request : undefined }
-      redirect={ fetched ? stats.stats.redirect : undefined } />;
+      redirect={ fetched ? stats.stats.redirect : undefined }
+      translate={translate}
+      />;
 
     const m = fullscreen && fetched;
 
@@ -64,7 +71,10 @@ export default class Stats extends React.Component {
       <LoadingLayerView hidden={ !stats.isFetching } style={ {position: 'fixed', } } />
       <div class='ia-stats-tab__column' style={ { flexGrow: 6, maxWidth: '53%', } }>
         { generals }
-        <ViewReport views={ fetched ? stats.stats : undefined }/>
+        <ViewReport
+          views={ fetched ? stats.stats : undefined }
+          translate={translate}
+          />
         <IntervalViews views={ fetched ? stats.stats.time_average[0].in_interval : undefined } />
       </div>
       <div class='ia-stats-tab__column' style={ { flexGrow: 5, maxWidth: '47%', } }>
@@ -78,7 +88,7 @@ export default class Stats extends React.Component {
     return !m ? main : <div class='ia-ad-stats-tab__fullscreen-tab-wrapper'>
       <Header title={title} />
       { main }
-    </div>;    
+    </div>;
   }
 }
 
