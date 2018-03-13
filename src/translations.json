@@ -99,10 +99,25 @@
     "Название",
     "نام"
   ],
+  "number-of-views": [
+    "Number of views",
+    "Кол-во просмотров",
+    "تعداد بازدیدها"
+  ],
+  "number-of-users": [
+    "Number of users",
+    "Кол-во пользователей",
+    "تعداد کاربران"
+  ],
   "password":[
     "Password",
     "Пароль",
     "کلمه عبور"
+  ],
+  "percentage-of-users": [
+    "% of users",
+    "% пользователей",
+    "درصد کاربران"
   ],
   "pick-a-source":[
     "Pick a source",

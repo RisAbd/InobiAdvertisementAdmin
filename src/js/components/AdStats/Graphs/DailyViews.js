@@ -36,21 +36,21 @@ export default class DailyViews extends React.Component {
 
   render() {
 
-    const { views } = this.props;
+    const { views, translate } = this.props;
 
     const data = Object.keys(views).map((hourStr) => parseInt(hourStr))
       .map((hour) => ({ hour, views: views[hour], }));
 
-    return <AdInfo title='Average daily views' style={ { flexGrow: 2, } }>
+    return <AdInfo title={translate('avg-daily-views')} style={ { flexGrow: 2, } }>
       <ResponsiveContainer width='100%' height='80%' minHeight={320}>
         <BarChart data={data}  margin={ {top: 30, left: 0, bottom: 20, right: 20} }>
-          
-          <XAxis dataKey='hour' label={ <Label>hours</Label> } tickLine={false} interval={0} tickCount={ data.length } tickFormatter={ (hour) => `${hour}:00` } tick={ RotatedTick } />
-          <YAxis dataKey='views' label={ <Label>views</Label> } tick={ FontResizedTick } />
-          <CartesianGrid stroke="#ccc" 
+
+          <XAxis dataKey='hour' label={ <Label>{ translate('views') }</Label> } tickLine={false} interval={0} tickCount={ data.length } tickFormatter={ (hour) => `${hour}:00` } tick={ RotatedTick } />
+          <YAxis dataKey='views' label={ <Label>{ translate('hours') }</Label> } tick={ FontResizedTick } />
+          <CartesianGrid stroke="#ccc"
             isAnimationActive={ false }
             vertical={ false } />
-          <Bar type="monotone" dataKey="views" 
+          <Bar type="monotone" dataKey="views"
             barSize={50} fill="#0093ee"
             isAnimationActive={ false }>
             {
@@ -60,7 +60,7 @@ export default class DailyViews extends React.Component {
               })
             }
           </Bar>
-          <Tooltip formatter={ (views) => Math.round(views*10)/10 } 
+          <Tooltip formatter={ (views) => Math.round(views*10)/10 }
             labelFormatter={ (hour) => `${hour}:00` }
             animationDuration={100} cursor={{fill: '#0093ee', fillOpacity: 0.1}} />
 
