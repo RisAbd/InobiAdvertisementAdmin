@@ -1,0 +1,56 @@
+{
+  "Pages": {
+    "Ads": ["Ads", "Реклама", "تبلیغات"],
+    "Stats": ["Stats", "Статистика",  "آمار"]
+  },
+  "Ads": {
+    "Card": {
+      "created": ["Created", "Создан", "ساخته شد"],
+      "duration": ["Duration", "Длительность", "مدت"],
+      "requests": ["Requests", "Запросов", "درخواست ها"],
+      "redirect": ["Redirect", "Перенаправление", "هدایت"],
+      "views": ["Views", "Просмотров", "بازدیدها"],
+      "weight": ["Weight", "Вес", "وزن"]
+    },
+    "Modal": {
+      "create": ["Create", "Создать", "ساختن"],
+      "description": ["Description", "Описание", "شرح"],
+      "duration": ["Duration", "Длительность", "مدت"],
+      "modal-title": ["Create Ad", "Создать рекламу", "ساخت تبلیغات"],
+      "pick-a-source": ["Pick a source", "Выберите рекламодателя", "یک منبع را انتخاب کنید"],
+      "redirect-to": ["Redirect to", "Перенаправление на", "هدایت به"],
+      "success": [
+        "Ad Creation Succeeded",
+        "Реклама успешно создана",
+        "ساخت تبلیغات با موفقیت به پایان رسید"
+      ],
+      "title": ["Title", "Заголовок", "عنوان"],
+      "weight": ["Weight", "Вес", "وزن"]
+    }
+  },
+  "Auth": {
+    "login": ["Login", "Войти", "ورود"],
+    "logout": ["Logout", "Выйти", "خروج"],
+    "password": ["Password", "Пароль", "کلمه عبور"]
+  },
+  "Stats": {
+    "Generals": {
+      "heading": ["General information", "Основная информация", "اطلاعات کلی"],
+      "description": ["Description", "Описание", "شرح"],
+      "guarantied-duration": ["Guarantied duration", "Гарантированная продолжительность", "مدت تضمین شده هر بازدید"],
+      "interval": ["Interval", "Промежуток", "مدت"],
+      "media-type": ["Media type", "Тип медиа", "نوع اصلی"],
+      "name": ["Name", "Название", "نام"],
+      "redirect": ["Redirect", "Перенаправление", "هدایت"],
+      "redirect-to": ["Redirect to", "Перенаправление на", "هدایت به"]
+    },
+    "Views": {
+      "heading": ["View report", "Отчет по просмотрам", "مشاهده گزارش"],
+      "avg-per-day": ["Average per 1 day", "Среднее за день", "متوسط روزانه"],
+      "avg-per-week": ["Average per 1 week", "Среднее за неделю", "متوسط هفتگی"],
+      "total": ["Total for interval", "Всего за промежуток", "بازه زمانی کل"],
+      "views": ["Views", "Просмотры", "بازدیدها"],
+      "unique-views": ["Unique views", "Уникальные просмотры", "بازدیدهای خاص"]
+    }
+  }
+}

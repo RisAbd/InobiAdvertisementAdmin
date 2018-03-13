@@ -111,13 +111,13 @@ export function required(pattern='', message = 'This field is required') {
 export function adDescriptor(ad, main_key='title', filler_key='description', length=30) {
   const { 
     [main_key]: title, 
-    [filler_key]: filler, 
+    [filler_key]: filler = '', 
   } = ad;
 
   let s = filler;
-  if ((title.length+filler.length+3) > length) {
-    s = filler.substr(0, (length-6) - title.length)+'...';
-  }
+  // if ((title.length+filler.length+3) > length) {
+  //   s = filler.substr(0, (length-6) - title.length)+'...';
+  // }
   return `${title} (${s})`;
 }
 

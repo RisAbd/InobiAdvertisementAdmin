@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import ScrollArea from 'react-scrollbar';
+import { getTranslate } from 'react-localize-redux';
 
 import Ad from '../components/Ad';
 import CreateAdButton from '../components/CreateAdButton';
@@ -14,8 +15,12 @@ import { INTERVAL } from '../constants';
 
 const tag = '@AdsPage:';
 
+const mapStateToProps = ({ ads, locale }) => ({
+  ads,
+  translate: getTranslate(locale),
+});
 
-@connect((store) => ({ads: store.ads}))
+@connect(mapStateToProps)
 export default class Ads extends React.Component {
 
   state = {
@@ -52,13 +57,13 @@ export default class Ads extends React.Component {
 
   render() {
 
-    const { ads } = this.props;
+    const { ads, translate } = this.props;
     const adComponents = ads.ads.map((ad, i) => <Ad key={ad.id+i} ad={ad} />);
 
     const { isOnAdCreate } = this.state;
 
     return <div class={ 'ia-tab ia-ads-tab' + (isOnAdCreate ? ' ia-lock' : '') } >
-      <CreateAdModalView title='Create Ad' isOpen={ isOnAdCreate } 
+      <CreateAdModalView title={translate('Ads.Modal.modal-title')} isOpen={ isOnAdCreate }
       onCloseClick={ this.onCreateAdClose } onAdCreated={ this.onAdCreated } />
       { adComponents }
       { ads.isFetching ? <Spinner centered height='100px' width='100px' /> : null }

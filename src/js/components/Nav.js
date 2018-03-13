@@ -2,14 +2,20 @@ import React from "react";
 import { NavLink as Link, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { getTranslate } from 'react-localize-redux';
 
 import { logout } from '../actions/loginActions';
 
 const tag = '@NavBar:';
 
+const mapStateToProps = ({ login, stats, locale }) => ({
+  login,
+  fullscreen: stats.fullscreen,
+  translate: getTranslate(locale)
+});
 
 @withRouter
-@connect((store) => ({login: store.login, fullscreen: store.stats.fullscreen }))
+@connect(mapStateToProps)
 export default class NavBar extends React.Component {
 
   shouldHide = () => {
@@ -24,7 +30,7 @@ export default class NavBar extends React.Component {
 
   render() {
 
-    const { loggedIn } = this.props.login;
+    const { login: { loggedIn }, translate } = this.props;
 
     if (this.shouldHide()) {
       return null;
@@ -37,21 +43,21 @@ export default class NavBar extends React.Component {
             <img class='ia-navbar__logo-image' src='images/logo_title.png' />
           </Link>
           <Link to="/ads" class='ia-navbar__button' activeClassName='ia-navbar__button--active'>
-            <span class='ia-navbar__button-text'>Ads</span>
-          </Link>
-          <Link to="/map" class='ia-navbar__button' activeClassName='ia-navbar__button--active'>
-            <span class='ia-navbar__button-text'>Map</span>
+            <span class='ia-navbar__button-text'>
+              { translate('Pages.Ads') }
+            </span>
           </Link>
           <Link to="/stats" class='ia-navbar__button' activeClassName='ia-navbar__button--active'>
-            <span class='ia-navbar__button-text'>Stats</span>
+            <span class='ia-navbar__button-text'>
+              { translate('Pages.Stats') }
+            </span>
           </Link>
         </div>
         <div class='ia-navbar__container--alignment-end'>
-          <Link to='/test' activeClassName='' class='ia-navbar__button'>
-            <span class='ia-navbar__button-text'>Test</span>
-          </Link>
           <Link to='/login' activeClassName='' class='ia-navbar__button' onClick={this.logout}>
-            <span class='ia-navbar__button-text'>Logout</span>
+            <span class='ia-navbar__button-text'>
+              { translate('Auth.logout') }
+            </span>
           </Link>
         </div>
       </div>

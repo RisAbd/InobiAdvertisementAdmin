@@ -5,6 +5,8 @@ import Item from './Item';
 
 import { URL, MEDIA_TYPES_INLINE } from '../../constants';
 
+import { jwt } from '../../utils';
+
 const tag = '@ItemPicker.SrcItem:';
 
 
@@ -18,7 +20,7 @@ export default class SrcItem extends React.Component {
     if (!MEDIA_TYPES_INLINE.includes(extension)) {
       return null;
     }
-    const srcUrl = URL.thumbnailTemp + name + '.thumb';
+    const srcUrl = `${ URL.thumbnail }${model}?in_temp=${true}&jwt=${jwt()}`; //URL.thumbnail + name + '.thumb';
     return <Item { ...this.props }>
       <img src={ srcUrl } class='ia-item-picker__ad-src-image' />
     </Item>;
