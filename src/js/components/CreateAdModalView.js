@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { getTranslate } from 'react-localize-redux';
+
 import ModalView from './ModalView';
 
 import ItemPickerModal from './ItemPickerModal';
@@ -20,8 +22,13 @@ import { timeout } from '../utils';
 
 const tag = '@CreateAdModalView:';
 
+const mapStateToProps = ({ mediaLists, ads, locale }) => ({
+  mediaLists,
+  create: ads.create,
+  translate: getTranslate(locale),
+});
 
-@connect((store) => ({ mediaLists: store.mediaLists, create: store.ads.create }))
+@connect(mapStateToProps)
 export default class CreateAdModalView extends React.Component {
 
   _DEFAULT_STATE = {
@@ -125,7 +132,7 @@ export default class CreateAdModalView extends React.Component {
   render() {
     const { ad, showItemPicker, dir, created } = this.state;
 
-    const { create, mediaLists, onAdCreate, ...rest } = this.props;
+    const { create, mediaLists, onAdCreate, translate, ...rest } = this.props;
 
     const { [dir]: media } = mediaLists;
 
@@ -133,7 +140,7 @@ export default class CreateAdModalView extends React.Component {
 
       { !!media.fetched ?
         <ItemPickerModal
-          title='Pick A Source'
+          title={translate('Ads.Modal.pick-a-source')}
           isOpen={ showItemPicker }
           onCloseClick={ this.onItemPickerClose }
 
@@ -145,11 +152,11 @@ export default class CreateAdModalView extends React.Component {
         onSubmit={ this.handleFormSubmit }>
 
         { create.error ? <ErrorMessage error={ create.error } /> : null }
-        { created ? <SuccessMessage content='Ad Creation Succeeded' /> : null }
+        { created ? <SuccessMessage content={translate('Ads.Modal.success')} /> : null }
 
         { create.isPosting ? <Spinner centered width='80px' height='80px' withShim />  : null }
 
-        <div class='ia-create-ad-form__single-field' 
+        <div class='ia-create-ad-form__single-field'
           style={{display: 'flex', justifyContent: 'center', margin: '5px 0'}}>
           <Thumbnail dir={ dir } src={ ad.source || null } type={ ad.type }
           onClick={ this.onPickSourceButtonClick } />
@@ -175,17 +182,17 @@ export default class CreateAdModalView extends React.Component {
           value={ ad.title || '' }
           onChange={ this.onAdValueChange }
           class='ia-create-ad-form__title'
-          placeholder='Title' />
+          placeholder={translate('Ads.Modal.title')} />
 
         <textarea class='ia-create-ad-form__single-field'
           name="description"
           cols="25" rows="4"
           onChange={ this.onAdValueChange }
           value={ ad.description || '' }
-          placeholder='Description' />
+          placeholder={translate('Ads.Modal.description')} />
 
         <div class='ia-create-ad-form__single-field'>
-          <label to='weight'>Weight: </label>
+          <label to='weight'>{ translate('Ads.Modal.weight') }: </label>
           <input type='range' name='weight'
             min='1' max='15' step='1'
             onChange={ this.onAdValueChange }
@@ -194,14 +201,14 @@ export default class CreateAdModalView extends React.Component {
         </div>
 
         <div class='ia-create-ad-form__single-field'>
-          <label to='duration'>Duration: </label>
+          <label to='duration'>{ translate('Ads.Modal.duration') }: </label>
           <input type='number' name='duration'
           onChange={ this.onAdValueChange }
           value={ ad.duration } />
         </div>
 
         <div class='ia-create-ad-form__single-field'>
-          <label to='redirect_url'>Redirect to: </label>
+          <label to='redirect_url'>{ translate('Ads.Modal.redirect-to') }: </label>
           <input type='text' name='redirect_url'
             value={ ad.redirect_url || '' }
             onChange={ this.onAdValueChange }
@@ -209,7 +216,7 @@ export default class CreateAdModalView extends React.Component {
         </div>
 
         <div class='ia-create-ad-form__single-field'>
-          <input type='submit' value='Create' />
+          <input type='submit' value={translate('Ads.Modal.create')} />
         </div>
       </form>
 
