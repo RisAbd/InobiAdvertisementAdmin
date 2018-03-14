@@ -13,7 +13,7 @@ export function Label(props) {
       x = 0, y = 0, dx = 15, dy = 20;
       break;
     case translate('hours'):
-      x = width, dx = 20, dy = 45;
+      x = height, y = height, dx = 45, dy = 75;
       break;
     case translate('days'):
       x = width, dx = 35, dy = 60;
