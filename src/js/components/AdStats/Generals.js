@@ -17,9 +17,11 @@ export default class Generals extends React.Component {
     const { request, redirect, translate } = this.props;
     const { found: ads, interval } = request;
 
+    const hasDescription = ads && ads.length === 1;
+
     const namesRow = [
       translate('name'),
-      ads.length === 0 ? '-' : ads.map((ad, i) => adDescriptor(ad, 'title', 'id', 20)).join(' + '),
+      ads.length === 0 ? '-' : ads.map((ad, i) => ad.title).join(' + '),
     ];
     const intervalRow = [
       translate('interval'),
@@ -58,12 +60,16 @@ export default class Generals extends React.Component {
       namesRow,
       intervalRow,
       // createdRow,
-      descriptionRow,
       redirectRow,
       redirectToRow,
       mediaTypesRow,
       durationsRow,
     ];
+
+    if (hasDescription) {
+      rows.push(descriptionRow);
+    }
+
     const spans= [1, 1];
 
     return <AdInfo title={translate('generals-heading')} >
