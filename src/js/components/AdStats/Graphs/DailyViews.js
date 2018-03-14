@@ -38,19 +38,21 @@ export default class DailyViews extends React.Component {
 
     const { views, translate } = this.props;
 
+    const VIEWS_LOCALIZED_STRING = translate('views');
+
     const data = Object.keys(views).map((hourStr) => parseInt(hourStr))
-      .map((hour) => ({ hour, views: views[hour], }));
+      .map((hour) => ({ hour, [VIEWS_LOCALIZED_STRING]: views[hour], }));
 
     return <AdInfo title={translate('avg-daily-views')} style={ { flexGrow: 2, } }>
       <ResponsiveContainer width='100%' height='80%' minHeight={320}>
         <BarChart data={data}  margin={ {top: 30, left: 0, bottom: 20, right: 20} }>
 
           <XAxis dataKey='hour' label={ <Label>{ translate('views') }</Label> } tickLine={false} interval={0} tickCount={ data.length } tickFormatter={ (hour) => `${hour}:00` } tick={ RotatedTick } />
-          <YAxis dataKey='views' label={ <Label>{ translate('hours') }</Label> } tick={ FontResizedTick } />
+          <YAxis dataKey={VIEWS_LOCALIZED_STRING} label={ <Label>{ translate('hours') }</Label> } tick={ FontResizedTick } />
           <CartesianGrid stroke="#ccc"
             isAnimationActive={ false }
             vertical={ false } />
-          <Bar type="monotone" dataKey="views"
+          <Bar type="monotone" dataKey={VIEWS_LOCALIZED_STRING}
             barSize={50} fill="#0093ee"
             isAnimationActive={ false }>
             {
