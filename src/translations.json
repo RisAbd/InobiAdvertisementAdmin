@@ -1,10 +1,10 @@
 {
-  "Ads":[
+  "Ads": [
     "Ads",
     "Реклама",
     "تبلیغات"
   ],
-  "Stats":[
+  "Stats": [
     "Stats",
     "Статистика",
     "آمار"
@@ -19,37 +19,52 @@
     "Почасовая статистика просмотров за день",
     "متوسط بازدید روزانه"
   ],
-  "avg-per-day":[
+  "avg-per-day": [
     "Average per 1 day",
     "Среднее за день",
     "متوسط روزانه"
   ],
-  "avg-per-week":[
+  "avg-per-week": [
     "Average per 1 week",
     "Среднее за неделю",
     "متوسط هفتگی"
   ],
-  "create":[
+  "create": [
     "Create",
     "Создать",
     "ساختن"
   ],
-  "created":[
+  "created": [
     "Created",
     "Создан",
     "ساخته شد"
   ],
-  "create-ad":[
+  "create-ad": [
     "Create Ad",
     "Создать рекламу",
     "ساخت تبلیغات"
   ],
-  "description":[
+  "date-from": [
+    "Date from",
+    "Дата от",
+    "از  تاریخ"
+  ],
+  "date-to": [
+    "Date to",
+    "Дата до",
+    "تا  تاریخ"
+  ],
+  "days": [
+    "Days",
+    "Дни",
+    "روزها"
+  ],
+  "description": [
     "Description",
     "Описание",
     "شرح"
   ],
-  "duration":[
+  "duration": [
     "Duration",
     "Длительность",
     "مدت"
@@ -64,7 +79,7 @@
     "Основная информация",
     "اطلاعات کلی"
   ],
-  "guarantied-duration":[
+  "guarantied-duration": [
     "Guarantied duration",
     "Гарантированная продолжительность",
     "مدت تضمین شده هر بازدید"
@@ -74,27 +89,27 @@
     "Часы",
     "ساعات"
   ],
-  "interval":[
+  "interval": [
     "Interval",
     "Промежуток",
     "مدت"
   ],
-  "login":[
+  "login": [
     "Login",
     "Войти",
     "ورود"
   ],
-  "logout":[
+  "logout": [
     "Logout",
     "Выйти",
     "خروج"
   ],
-  "media-type":[
+  "media-type": [
     "Media type",
     "Тип медиа",
     "نوع اصلی"
   ],
-  "name":[
+  "name": [
     "Name",
     "Название",
     "نام"
@@ -109,7 +124,22 @@
     "Кол-во пользователей",
     "تعداد کاربران"
   ],
-  "password":[
+  "number-of-view-in-interval": [
+    "Number of view in interval",
+    "Кол-во просмотров за промежуток",
+    "تعداد بازدیدها در بازه زمانی"
+  ],
+  "os-heading": [
+    "Operation system",
+    "Операционная система",
+    "سیستم عملیات"
+  ],
+  "os-versions-heading": [
+    "OS versions",
+    "Версии ОС",
+    "نسخه های سیستم عملیات"
+  ],
+  "password": [
     "Password",
     "Пароль",
     "کلمه عبور"
@@ -119,52 +149,57 @@
     "% пользователей",
     "درصد کاربران"
   ],
-  "pick-a-source":[
+  "pick-a-source": [
     "Pick a source",
     "Выберите рекламодателя",
     "یک منبع را انتخاب کنید"
   ],
-  "redirect":[
+  "redirect": [
     "Redirect",
     "Перенаправление",
     "هدایت"
   ],
-  "redirect-to":[
+  "redirect-to": [
     "Redirect to",
     "Перенаправление на",
     "هدایت به"
   ],
-  "requests":[
+  "requests": [
     "Requests",
     "Запросов",
     "درخواست ها"
   ],
-  "success":[
+  "show": [
+    "Show",
+    "Показать",
+    "نشان بده"
+  ],
+  "success": [
     "Ad Creation Succeeded",
     "Реклама успешно создана",
     "ساخت تبلیغات با موفقیت به پایان رسید"
   ],
-  "title":[
+  "title": [
     "Title",
     "Заголовок",
     "عنوان"
   ],
-  "total":[
+  "total": [
     "Total for interval",
     "Всего за промежуток",
     "بازه زمانی کل"
   ],
-  "unique-views":[
+  "unique-views": [
     "Unique views",
     "Уникальные просмотры",
     "بازدیدهای خاص"
   ],
-  "views":[
+  "views": [
     "Views",
     "Просмотры",
     "بازدیدها"
   ],
-  "view-report":[
+  "view-report": [
     "View report",
     "Отчет по просмотрам",
     "مشاهده گزارش"
@@ -174,9 +209,14 @@
     "Отчет по просмотрам",
     "مشاهده گزارش"
   ],
-  "weight":[
+  "weight": [
     "Weight",
     "Вес",
     "وزن"
+  ],
+  "with-file": [
+    "With file",
+    "С файлом",
+    "با فایل"
   ]
 }
