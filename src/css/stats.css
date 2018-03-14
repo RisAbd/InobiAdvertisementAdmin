@@ -30,7 +30,7 @@
 .ia-ad-stats-info-chunk {
   margin: 4px 10px;
   flex-shrink: 0;
-  
+
   background-color: white;
 }
 
@@ -78,7 +78,7 @@
 /*  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;*/
-} 
+}
 
 .ia-ad-stats-table p {
   margin: 0;
@@ -132,7 +132,7 @@
 }
 
 .ia-ad-stats-requester * {
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 @media print {
@@ -156,7 +156,7 @@
   padding-bottom: 10px;
 
   background-color: rgb(209, 236, 253);
-  color: black;    
+  color: black;
   box-shadow: inset 0 0 2px 1px #0093ee;
   transition: .5s;
 }
@@ -213,7 +213,7 @@
   background-repeat: no-repeat;
   background-position: center;
 
-  border: none; 
+  border: none;
   border-radius: 50%;
 }
 
@@ -285,19 +285,19 @@
   background-size: 57% 70%;
 }
 
-.ia-ad-stats-requester ul {
-  
+.ia-ad-stats-requester__list {
+  height: 300px;
   padding: 3px 5px;
   margin: 0;
-
   list-style-type: none;
+  overflow: auto;
 }
 
 
 /*HEADER*/
 
 .ia-stats-tab--fullscreened {
-  max-width: calc(100% - 60px);  
+  max-width: calc(100% - 60px);
 }
 
 .ia-ad-stats-tab__fullscreen-tab-wrapper {
@@ -319,7 +319,7 @@
   justify-content: space-between;
 
   width: calc(100% - 40px);
-  height: 50px; 
+  height: 50px;
   flex-shrink: 0;
 
   position: relative;
@@ -360,7 +360,7 @@
 
 .ia-ad-stats-fullscreen-header h1 {
   flex-grow: 3;
-  
+
   font-weight: 600;
   color: white;
   background-color: #0093ee;
@@ -380,7 +380,7 @@
   flex-grow: 5;
 
   padding-left: 10%;
-  
+
   text-align: left;
   color: #0093ee;
   background-color: white;
