@@ -32,6 +32,9 @@
   flex-shrink: 0;
 
   background-color: white;
+}
+
+.ia-ad-stats-info-chunk .recharts-responsive-container {
   direction: ltr;
 }
 
