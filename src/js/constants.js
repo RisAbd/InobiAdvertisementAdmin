@@ -1,12 +1,14 @@
 const { protocol, hostname } = window.location;
 const PORT = 5000;
 
-export const MEDIA_HOST = 'http://176.123.244.5'
-export const HOST = 'http://localhost:5000/advertisement';  // `${protocol}//${hostname}:${PORT}`; // 'http://localhost:5000';
+// export const MEDIA_HOST = 'http://176.123.244.5';
+const BASE_URL = 'http://transport.inobi.kg:5010';
+export const MEDIA_HOST = `${BASE_URL}/advertisement`;
+export const HOST = MEDIA_HOST;
 
 export const URL = {
   host:                 HOST,
-  login:                HOST + '/v1/admin/login',
+  login:                BASE_URL + '/app/v2/login',
   checkToken:           HOST + '/v1/admin/check_token',
 
   createAd:             HOST + '/v1/admin/create',
@@ -15,7 +17,7 @@ export const URL = {
 
   ads:                  HOST + '/v1/admin/ads',
   media:                MEDIA_HOST + '/media/',
-  thumbnail:            MEDIA_HOST + '/media/thumbnail/',
+  thumbnail:            MEDIA_HOST + '/v1/uploads/thumbnail/',
   temp:                 MEDIA_HOST + '/temp/',
   thumbnailTemp:        HOST + '/temp/thumbnail/',
   uploads:              HOST + '/v1/uploads/',
