@@ -39,6 +39,13 @@ export function createAd(ad) {
   // }
 }
 
+export function updateAd({id, ...propsToUpdate}) {
+  return {
+    type: 'UPDATE_AD',
+    payload: fetch(URL.updateAd, {id, ...propsToUpdate}, 'POST')
+  };
+}
+
 export function disableAd(ad, del=false) {
   return {
     type: 'DELETE_AD',
