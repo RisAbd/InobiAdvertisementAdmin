@@ -14,6 +14,11 @@
     "Создание рекламы",
     "ساخت تبلیغات"
   ],
+  "all": [
+    "All",
+    "Все",
+    "همه"
+  ],
   "avg-daily-views": [
     "Average daily views",
     "Почасовая статистика просмотров за день",
@@ -64,10 +69,25 @@
     "Описание",
     "شرح"
   ],
+  "disabled": [
+    "Disabled",
+    "Неактивная",
+    "غیر فعال"
+  ],
   "duration": [
     "Duration",
     "Длительность",
     "مدت"
+  ],
+  "enabled": [
+    "Enabled",
+    "Активная",
+    "فعال"
+  ],
+  "filters": [
+    "Filters",
+    "Фильтры",
+    "فیلترها"
   ],
   "frequency-of-views": [
     "Frequency of views",
@@ -113,6 +133,11 @@
     "Name",
     "Название",
     "نام"
+  ],
+  "no-ads": [
+    "No ads with '${state}' state",
+    "Нет рекламы со статусом: '${state}'",
+    "هیچ تبلیغی با '${state}' دولت"
   ],
   "number-of-views": [
     "Number of views",
@@ -173,6 +198,11 @@
     "Show",
     "Показать",
     "نشان بده"
+  ],
+  "stat-filter-state": [
+    "Ad state",
+    "Состояние рекламы",
+    "دولت آگهی"
   ],
   "success": [
     "Ad Creation Succeeded",
