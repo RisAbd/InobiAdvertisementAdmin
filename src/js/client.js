@@ -4,53 +4,31 @@ import './styles.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import { Redirect } from 'react-router';
+import { HashRouter as Router} from "react-router-dom";
 
-import { addTranslation, getActiveLanguage, initialize, setActiveLanguage } from 'react-localize-redux';
+import { addTranslation, initialize } from 'react-localize-redux';
 
 import store from './store.js';
 
-import NavBar from './components/Nav';
+import { LANGUAGES, LANGUAGE_LS_KEY } from "./constants";
 
-import LoginChecker from './components/LoginCheckerLayout';
-import Ads from './pages/Ads';
-import NoMatch from './pages/NoMatch';
-import Stats from './pages/Stats';
+import { App } from './App';
+
+import {checkFromStorage} from "./actions/loginActions";
 
 const tag = '@client.js:';
 
 const app = document.getElementById('app');
 
-const languages = [
-  { name: 'English', code: 'en' },
-  { name: 'Русский', code: 'ru' },
-  { name: 'فارْسِى', code: 'fa' },
-];
-store.dispatch(initialize(languages, { defaultLanguage: 'en' }));
-store.dispatch(addTranslation(require('../translations.json')));
+const [en] = LANGUAGES.map(lang => lang.code);
+const currentLang = localStorage.getItem(LANGUAGE_LS_KEY) || en;
 
-const isLtr = getActiveLanguage(store.getState().locale).code !== 'fa';
+store.dispatch(initialize(LANGUAGES, { defaultLanguage: currentLang }));
+store.dispatch(addTranslation(require('../translations.json')));
+store.dispatch(checkFromStorage());
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <div class='ia-react-root' dir={isLtr ? 'ltr' : 'rtl'}>
-        <NavBar />
-        <Switch>
-          <Route path='/login' component={ LoginChecker } />
-          <Route path='/ads' component={ Ads } />
-          <Route path='/stats' component={ Stats } />
-
-          <Route exact path='/' render={
-            () => <Redirect to={
-              store.getState().login.loggedIn ? '/ads' : '/login'
-            } />
-          } />
-
-          <Route component={ NoMatch } />
-        </Switch>
-      </div>
-    </Router>
+    <App/>
   </Provider>,
-   app);
+ app);

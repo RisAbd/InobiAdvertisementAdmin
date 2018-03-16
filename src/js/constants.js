@@ -51,3 +51,11 @@ export const MEDIA_TYPES = {
 export const MEDIA_TYPES_INLINE = Object.keys(MEDIA_TYPES)
   .map((key) => MEDIA_TYPES[key])
   .reduce((all, arr) => { all.push(...arr); return all;}, [])
+
+export const LANGUAGE_LS_KEY = 'ia-ads-lang';
+
+export const LANGUAGES = [
+  { name: 'English', code: 'en' },
+  { name: 'Русский', code: 'ru' },
+  { name: 'فارْسِى', code: 'fa' },
+];
