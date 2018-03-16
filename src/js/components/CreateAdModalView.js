@@ -36,7 +36,7 @@ export default class CreateAdModalView extends React.Component {
       title: null,
       description: null,
       redirect_url: null,
-      weight: 12,
+      weight: 1,
       duration: 8,
       type: 'unknown',
       source: null,
@@ -194,7 +194,7 @@ export default class CreateAdModalView extends React.Component {
         <div class='ia-create-ad-form__single-field'>
           <label to='weight'>{ translate('weight') }: </label>
           <input type='range' name='weight'
-            min='1' max='15' step='1'
+            min='1' max='10' step='1'
             onChange={ this.onAdValueChange }
             value={ ad.weight || 1 } />
           <span>{ ad.weight }</span>
