@@ -62,7 +62,7 @@ export default class Ad extends React.Component {
                 { translate('created')}: { created.toLocaleDateString() }
               </span>
               <span className="ia-ad__badge">
-                {ad.type}
+                { translate(ad.type) }
               </span>
             </div>
             <div class='ia-ad__info-description'>
