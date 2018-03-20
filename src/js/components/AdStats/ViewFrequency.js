@@ -18,9 +18,9 @@ export default class ViewFrequency extends React.Component {
     //   "5+": "564 (4.4%)"
     // };
 
-    const { uviews } = this.props;
+    const { uviews, translate } = this.props;
 
-    const headers = ['# of views', '# of users', '% users'];
+    const headers = [translate('number-of-views'), translate('number-of-users'), translate('percentage-of-users')];
     const rows = Object.keys(uviews)
       .map((views) => views.toString())
       .sort()
@@ -29,7 +29,7 @@ export default class ViewFrequency extends React.Component {
 
     const spans= [1, 2, 2];
 
-    return <AdInfo title='Frequency of views' >
+    return <AdInfo title={translate('frequency-of-views')} >
       <Table headers={ headers } rows={ rows } spans={ spans } />
     </AdInfo>;
   }
@@ -38,6 +38,7 @@ export default class ViewFrequency extends React.Component {
 
 ViewFrequency.propTypes = {
   uviews: PropTypes.object.isRequired,
+  translate: PropTypes.func.isRequired,
 };
 
 ViewFrequency.defaultProps = {

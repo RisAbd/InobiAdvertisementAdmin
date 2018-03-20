@@ -12,8 +12,7 @@ const tag = '@AdStats.ViewReport:'
 export default class ViewReport extends React.Component {
   render() {
 
-    const { views, translate: translateFn } = this.props;
-    const translate = str => translateFn(`Stats.Views.${str}`);
+    const { views, translate } = this.props;
 
     let [ _, total ] = views.time_average;
     let { uniqueness: uniques } = views;
@@ -29,7 +28,7 @@ export default class ViewReport extends React.Component {
     ];
     const spans= [2, 1, 1];
 
-    return <AdInfo title={translate('heading')}>
+    return <AdInfo title={translate('view-report-heading')}>
       <Table headers={ headers } rows={ rows } spans={ spans } />
     </AdInfo>;
   }

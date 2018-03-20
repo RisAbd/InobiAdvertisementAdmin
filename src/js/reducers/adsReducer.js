@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect';
 
 const tag = '@adsReducer:';
 
@@ -7,6 +8,7 @@ const initState = {
   ads: [],
   fetched: null,
   error: null,
+  sortKey: 'created',
   create: {
     isPosting: false,
     shouldReset: false,
@@ -19,7 +21,7 @@ export default function reducer(state=initState, action) {
     case 'FETCH_ADS_OK':
       return {
         ...state,
-        ads: action.payload.data.ads.sort((ad1, ad2) => ad2.created-ad1.created),
+        ads: action.payload.data.ads,
         isFetching: false,
         fetched: Date.now(),
       }
@@ -82,7 +84,36 @@ export default function reducer(state=initState, action) {
           shouldReset: false,
         },
       };
+    case 'UPDATE_AD':
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case 'UPDATE_AD_OK':
+      const updatedAd = action.payload.data.updated_ad;
+      return {
+        ...state,
+        ads: [...state.ads.filter(ad => ad.id !== updatedAd.id), updatedAd],
+        isFetching: false,
+      }
     default:
       return state;
   }
 }
+
+const getAds = state => state.ads.ads;
+const getSortKey = state => state.ads.sortKey;
+const getAdFilter = state => state.ads.filter;
+
+const getSortedAds = createSelector(
+  [
+    getAds,
+    getSortKey,
+  ],
+  (ads, sortKey) => ads.sort((a, b) => b[sortKey] - a[sortKey])
+);
+
+export const selectors = {
+  getAds,
+  getSortedAds
+};

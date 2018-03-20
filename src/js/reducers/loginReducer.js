@@ -52,7 +52,7 @@ export default function reducer(state=initState, action) {
       }
       break;
     case 'LOGIN_OK':
-      const jwt = action.payload.data.jwt;
+      const jwt = action.payload.data.token;
       localStorage.setItem('jwt', jwt);
       return {
         ...state,

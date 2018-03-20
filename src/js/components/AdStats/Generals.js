@@ -14,13 +14,14 @@ const tag = '@AdStats.Generals:'
 export default class Generals extends React.Component {
   render() {
 
-    const { request, redirect, translate: translateFn} = this.props;
+    const { request, redirect, translate } = this.props;
     const { found: ads, interval } = request;
-    const translate = str => translateFn(`Stats.Generals.${str}`);
+
+    const hasDescription = ads && ads.length === 1;
 
     const namesRow = [
       translate('name'),
-      ads.length === 0 ? '-' : ads.map((ad, i) => adDescriptor(ad, 'title', 'id', 20)).join(' + '),
+      ads.length === 0 ? '-' : ads.map((ad, i) => ad.title).join(' + '),
     ];
     const intervalRow = [
       translate('interval'),
@@ -59,15 +60,19 @@ export default class Generals extends React.Component {
       namesRow,
       intervalRow,
       // createdRow,
-      descriptionRow,
       redirectRow,
       redirectToRow,
       mediaTypesRow,
       durationsRow,
     ];
+
+    if (hasDescription) {
+      rows.push(descriptionRow);
+    }
+
     const spans= [1, 1];
 
-    return <AdInfo title={translate('heading')} >
+    return <AdInfo title={translate('generals-heading')} >
       <Table rows={ rows } spans={ spans } />
     </AdInfo>;
   }

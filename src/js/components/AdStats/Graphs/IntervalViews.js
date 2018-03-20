@@ -22,6 +22,7 @@ function RotatedTick(props) {
 
 function FontResizedTick(props) {
   const {x, y, stroke, payload} = props;
+
   return (
     <g transform={`translate(${x},${y})`}>
       <text x={0} y={0} dx={-5} dy={4} textAnchor="end" fill="#666" fontSize='12'>{payload.value}</text>
@@ -33,6 +34,7 @@ export default class IntervalViews extends React.Component {
 
   static propTypes = {
     views: PropTypes.object.isRequired,
+    translate: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -60,22 +62,28 @@ export default class IntervalViews extends React.Component {
 
   render() {
 
-    const { views } = this.props;
+    const { views, translate } = this.props;
+    const VIEWS_LOCALIZED_STRING = translate('views');
 
     const data = Object.keys(views)
       .sort()
-      .map((date) => ({ date: this.normalizeDate(date), views: views[date] }));
+      .map((date) => ({ date: this.normalizeDate(date), [VIEWS_LOCALIZED_STRING]: views[date] }));
 
     const min = mround(Math.min(...data.map(({views, ...r}) => views)), -1)-40,
           max = mround(Math.max(...data.map(({views, ...r}) => views)), -1)+40;
 
-    return <AdInfo title='Number of view in interval' style={ { flexGrow: 2, maxHeight: '100%'} }>
+    return <AdInfo title={translate('number-of-view-in-interval')} style={ { flexGrow: 2, maxHeight: '100%'} }>
       <ResponsiveContainer width='100%' height='80%' minHeight={370} minWidth={400}>
         <LineChart data={data} margin={ {top: 30, left: 0, bottom: 40, right: 40} }>
-          <Line type="monotone" dataKey="views" 
-            barSize={50} fill="#0093ee" isAnimationActive={ false } />
-          <XAxis dataKey='date' label={ <Label>days</Label> } interval={0} tickCount={data.length} tick={RotatedTick} />
-          <YAxis dataKey='views' label={ <Label>views</Label> } domain={[min, max]} tick={FontResizedTick} />
+          <Line
+            type="monotone"
+            dataKey={VIEWS_LOCALIZED_STRING}
+            barSize={50}
+            fill="#0093ee"
+            isAnimationActive={ false }
+            />
+          <XAxis dataKey='date' label={ <Label>{ translate('days') }</Label> } interval={0} tickCount={data.length} tick={RotatedTick} />
+          <YAxis dataKey={VIEWS_LOCALIZED_STRING} label={ <Label>{ VIEWS_LOCALIZED_STRING }</Label> } domain={[min, max]} tick={FontResizedTick} />
           <CartesianGrid stroke="#ccc"
             vertical={ false } />
           <Tooltip labelFormatter={ (date) => date } animationDuration={100}/>

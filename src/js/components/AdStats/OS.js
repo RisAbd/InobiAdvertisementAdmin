@@ -10,7 +10,7 @@ const tag = '@AdStats.OS:'
 export default class OS extends React.Component {
   render() {
 
-    const { stats } = this.props;
+    const { stats, translate } = this.props;
 
     const rows = Object.keys(stats).sort()
       .filter((os) => stats[os].hasOwnProperty('total'))
@@ -18,7 +18,7 @@ export default class OS extends React.Component {
 
     const spans = [1, 4];
 
-    return <AdInfo title='Operation system' >
+    return <AdInfo title={ translate('os-heading') } >
       <Table rows={ rows } spans={ spans } zebra={2} />
     </AdInfo>;
   }
@@ -27,6 +27,7 @@ export default class OS extends React.Component {
 
 OS.propTypes = {
   stats: PropTypes.object.isRequired,
+  translate: PropTypes.func.isRequired,
 };
 
 OS.defaultProps = {

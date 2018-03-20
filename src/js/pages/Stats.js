@@ -75,13 +75,28 @@ export default class Stats extends React.Component {
           views={ fetched ? stats.stats : undefined }
           translate={translate}
           />
-        <IntervalViews views={ fetched ? stats.stats.time_average[0].in_interval : undefined } />
+        <IntervalViews
+          views={ fetched ? stats.stats.time_average[0].in_interval : undefined }
+          translate={translate}
+          />
       </div>
       <div class='ia-stats-tab__column' style={ { flexGrow: 5, maxWidth: '47%', } }>
-        <DailyViews views={ fetched ? stats.stats.time_average[0].daily : undefined }/>
-        <ViewFrequency uviews={ fetched ? stats.stats.uniqueness.general : undefined } />
-        <OSStats stats={ fetched ? stats.stats.devices.summary : undefined } />
-        <OSVersions stats={ fetched ? stats.stats.devices.summary : undefined } />
+        <DailyViews
+          views={ fetched ? stats.stats.time_average[0].daily : undefined }
+          translate={translate}
+          />
+        <ViewFrequency
+          uviews={ fetched ? stats.stats.uniqueness.general : undefined }
+          translate={translate}
+          />
+        <OSStats
+          stats={ fetched ? stats.stats.devices.summary : undefined }
+          translate={translate}
+          />
+        <OSVersions
+          stats={ fetched ? stats.stats.devices.summary : undefined }
+          translate={translate}
+          />
       </div>
     </div>;
 

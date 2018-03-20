@@ -3,10 +3,10 @@ import axios from 'axios';
 import { URL } from '../constants';
 
 
-export function login(admin_key) {
+export function login(credentials) {
   return {
     type: 'LOGIN',
-    payload: myFetch(URL.login, { admin_key })
+    payload: myFetch(URL.login, credentials, 'POST')
   };
 }
 

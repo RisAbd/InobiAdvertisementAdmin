@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getTranslate } from 'react-localize-redux';
 
 import ErrorMessage from '../MessageView/HTTPError';
 
@@ -15,8 +16,13 @@ import { randomColor, adDescriptor, downloadFileLink } from '../../utils';
 
 const tag = '@AdStatsRequester:';
 
+const mapStateToProps = ({ ads, stats, locale }) => ({
+  ads,
+  stats,
+  translate: getTranslate(locale),
+});
 
-@connect((store) => ({ads: store.ads, stats: store.stats}))
+@connect(mapStateToProps)
 export default class AdStatsRequester extends React.Component {
   state = {
     shouldReset: this.props.stats.fetched,
@@ -135,7 +141,7 @@ export default class AdStatsRequester extends React.Component {
 
   render() {
 
-    const { stats } = this.props;
+    const { stats, translate } = this.props;
     const { ads } = this.props.ads;
 
     const { fetched } = stats;
@@ -148,7 +154,7 @@ export default class AdStatsRequester extends React.Component {
       return <li key={ ad.id }
         class={ selected ? 'ia-ad-stats-requester__ad--selected' : null }>
         <label>
-          <input type='checkbox' 
+          <input type='checkbox'
             checked={ selected }
             onClick={ this.onAdSelected.bind(this, ad.id) } />
           { adDescriptor(ad) }
@@ -162,39 +168,42 @@ export default class AdStatsRequester extends React.Component {
 
     return <div class={ `ia-ad-stats-requester${ expanded ? '': ' ia-ad-stats-requester--hidden'}` }
         onKeyDown={ this.onEscDown }>
-      
+
       <form class='ia-ad-stats-requester__form'
         onSubmit={ this.onStatsSubmit }>
         { stats.error ? <ErrorMessage error={ stats.error } style={ {maxWidth: '250px'} }/> : null }
         <ul class='ia-ad-stats-requester__list'>
           { adComponents }
         </ul>
-        <label>Date from:&nbsp;
-          <input type='date' 
-            value={ unix(request.interval.start).format('YYYY-MM-DD') } 
+        <label>
+          { translate('date-from') }:&nbsp;
+          <input type='date'
+            value={ unix(request.interval.start).format('YYYY-MM-DD') }
             onChange={ this.onStartDateChange } />
-        </label> 
-        <label>To:&nbsp;
-          <input type='date' 
-            value={ unix(request.interval.end).format('YYYY-MM-DD') } 
+        </label>
+        <label>
+          { translate('date-to') }:&nbsp;
+          <input type='date'
+            value={ unix(request.interval.end).format('YYYY-MM-DD') }
             onChange={ this.onEndDateChange } />
           </label>
-        <label>With File: 
+        <label>
+          { translate('with-file') }:&nbsp;
           <input
-            type='checkbox' checked={ request.withFile } 
+            type='checkbox' checked={ request.withFile }
             onChange={ this.onWithFileClick.bind(this, request.withFile) } />
         </label>
-        <input type='submit' value='Get Stats' />
+        <input type='submit' value={ translate('show') } />
       </form>
       <div class='ia-ad-stats-requester__buttons-container'>
-        <button class={ 'ia-ad-stats-requester__fullscreen-button' + (fetched ? ' ia-ad-stats-requester__fullscreen-button--active' : '') } 
+        <button class={ 'ia-ad-stats-requester__fullscreen-button' + (fetched ? ' ia-ad-stats-requester__fullscreen-button--active' : '') }
           onClick={ fetched ? this.onFullscreenClick : null }/>
         <a class={ 'ia-ad-stats-requester__download-button' + (!enableFileLink ? ' ia-ad-stats-requester__download-button--disabled' : '') }
           href={ enableFileLink ? downloadFileLink(stats.stats.file) : '' }
           title='Download report as file'
           target='_blank'
           onClick={ this.onDownloadClick } />
-        <button class='ia-ad-stats-requester__expand-button' 
+        <button class='ia-ad-stats-requester__expand-button'
           onClick={ this.onExpandClick } />
       </div>
     </div>;

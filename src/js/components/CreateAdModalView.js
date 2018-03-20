@@ -36,7 +36,7 @@ export default class CreateAdModalView extends React.Component {
       title: null,
       description: null,
       redirect_url: null,
-      weight: 12,
+      weight: 1,
       duration: 8,
       type: 'unknown',
       source: null,
@@ -140,7 +140,7 @@ export default class CreateAdModalView extends React.Component {
 
       { !!media.fetched ?
         <ItemPickerModal
-          title={translate('Ads.Modal.pick-a-source')}
+          title={translate('pick-a-source')}
           isOpen={ showItemPicker }
           onCloseClick={ this.onItemPickerClose }
 
@@ -152,7 +152,7 @@ export default class CreateAdModalView extends React.Component {
         onSubmit={ this.handleFormSubmit }>
 
         { create.error ? <ErrorMessage error={ create.error } /> : null }
-        { created ? <SuccessMessage content={translate('Ads.Modal.success')} /> : null }
+        { created ? <SuccessMessage content={translate('success')} /> : null }
 
         { create.isPosting ? <Spinner centered width='80px' height='80px' withShim />  : null }
 
@@ -182,33 +182,33 @@ export default class CreateAdModalView extends React.Component {
           value={ ad.title || '' }
           onChange={ this.onAdValueChange }
           class='ia-create-ad-form__title'
-          placeholder={translate('Ads.Modal.title')} />
+          placeholder={translate('title')} />
 
         <textarea class='ia-create-ad-form__single-field'
           name="description"
           cols="25" rows="4"
           onChange={ this.onAdValueChange }
           value={ ad.description || '' }
-          placeholder={translate('Ads.Modal.description')} />
+          placeholder={translate('description')} />
 
         <div class='ia-create-ad-form__single-field'>
-          <label to='weight'>{ translate('Ads.Modal.weight') }: </label>
+          <label to='weight'>{ translate('weight') }: </label>
           <input type='range' name='weight'
-            min='1' max='15' step='1'
+            min='1' max='10' step='1'
             onChange={ this.onAdValueChange }
             value={ ad.weight || 1 } />
           <span>{ ad.weight }</span>
         </div>
 
         <div class='ia-create-ad-form__single-field'>
-          <label to='duration'>{ translate('Ads.Modal.duration') }: </label>
+          <label to='duration'>{ translate('duration') }: </label>
           <input type='number' name='duration'
           onChange={ this.onAdValueChange }
           value={ ad.duration } />
         </div>
 
         <div class='ia-create-ad-form__single-field'>
-          <label to='redirect_url'>{ translate('Ads.Modal.redirect-to') }: </label>
+          <label to='redirect_url'>{ translate('redirect-to') }: </label>
           <input type='text' name='redirect_url'
             value={ ad.redirect_url || '' }
             onChange={ this.onAdValueChange }
@@ -216,7 +216,7 @@ export default class CreateAdModalView extends React.Component {
         </div>
 
         <div class='ia-create-ad-form__single-field'>
-          <input type='submit' value={translate('Ads.Modal.create')} />
+          <input type='submit' value={translate('create')} />
         </div>
       </form>
 
