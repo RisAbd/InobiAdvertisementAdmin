@@ -14,9 +14,11 @@ import ErrorMessage from './MessageView/HTTPError';
 import SuccessMessage from './MessageView/Success';
 import Spinner from './LoadingIndicator';
 
+import { FileInput } from './FileInput'
+
 import { INTERVAL, MEDIA_TYPES } from '../constants';
 import { fetchList } from '../actions/mediaActions';
-import { setCreateAdReset, createAd } from '../actions/adsActions';
+import { setCreateAdReset, createAd, uploadAdSource } from '../actions/adsActions';
 
 import { timeout } from '../utils';
 
@@ -82,6 +84,25 @@ export default class CreateAdModalView extends React.Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     this.props.dispatch(createAd(this.state.ad));
+  };
+
+  handleFileUpload = file => {
+    const data = new FormData();
+
+    data.append('file', file);
+    data.append('thumbnail', file);
+
+    this.props.dispatch(uploadAdSource(data))
+      .then(({ value }) => {
+        const { data } = value;
+        const source = (data.uploaded && data.uploaded.filename) || data.filename;
+
+        this.setState(prevState => ({
+          ...prevState,
+          ad: { ...prevState.ad, source }
+        }));
+      });
+
   };
 
   onPickSourceButtonClick = (e) => {
@@ -156,10 +177,27 @@ export default class CreateAdModalView extends React.Component {
 
         { create.isPosting ? <Spinner centered width='80px' height='80px' withShim />  : null }
 
-        <div class='ia-create-ad-form__single-field'
-          style={{display: 'flex', justifyContent: 'center', margin: '5px 0'}}>
-          <Thumbnail dir={ dir } src={ ad.source || null } type={ ad.type }
-          onClick={ this.onPickSourceButtonClick } />
+        <div class='ia-create-ad-form__single-field'>
+          <h5>
+            { translate('upload-source') }
+          </h5>
+          <div className="ia-create-ad-form__source-picker">
+            <Thumbnail
+              dir={ dir }
+              src={ ad.source }
+              type={ ad.type }
+            />
+            <div className="ia-create-ad-form__source-picker-btns">
+              <FileInput
+                placeholder={translate('upload-file-placeholder')}
+                btnText={translate('upload-file-btn')}
+                onChange={this.handleFileUpload}
+              />
+              <button type="button" onClick={this.onPickSourceButtonClick}>
+                { translate('choose-from-list') }
+              </button>
+            </div>
+          </div>
         </div>
 
         <input type='text' name='source'

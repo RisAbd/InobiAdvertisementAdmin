@@ -39,6 +39,11 @@
     "Баннер",
     "بنر"
   ],
+  "choose-from-list": [
+    "Choose from the list",
+    "Выберите из списка",
+    "از لیست انتخاب کنید"
+  ],
   "create": [
     "Create",
     "Создать",
@@ -238,6 +243,21 @@
     "Unique views",
     "Уникальные просмотры",
     "بازدیدهای خاص"
+  ],
+  "upload-file-btn": [
+    "Choose file",
+    "Выберите файл",
+    "یک فایل را انتخاب کنید"
+  ],
+  "upload-file-placeholder": [
+    "No file",
+    "Файл не выбран",
+    "هیچ فایل"
+  ],
+  "upload-source": [
+    "Upload source or choose one from the list",
+    "Загрузите медиа файл или выберите из списка",
+    "منبع آپلود یا یکی از لیست را انتخاب کنید"
   ],
   "video": [
     "Video",

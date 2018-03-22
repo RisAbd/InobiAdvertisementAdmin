@@ -27,14 +27,20 @@
   align-items: stretch;
 }
 
+.ia-create-ad-form__source-picker {
+  display: flex;
+  justify-content: space-between;
+}
+
 .ia-create-ad-form__single-field {
   width: 100%;
+  margin: 0 0 8px;
 }
 
 .ia-create-ad-form__single-field .ia-ad__image-container {
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background-size: cover !important;
 }
 
 .ia-create-ad-form__title {
