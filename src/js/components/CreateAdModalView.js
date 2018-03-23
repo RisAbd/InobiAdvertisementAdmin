@@ -18,7 +18,7 @@ import { FileInput } from './FileInput'
 
 import { INTERVAL, MEDIA_TYPES } from '../constants';
 import { fetchList } from '../actions/mediaActions';
-import { setCreateAdReset, createAd, uploadAdSource } from '../actions/adsActions';
+import { setCreateAdReset, createAd, uploadAdSource, deleteAdSource } from '../actions/adsActions';
 
 import { timeout } from '../utils';
 
@@ -81,6 +81,17 @@ export default class CreateAdModalView extends React.Component {
     }
   }
 
+  setAdProps(props, rest = {}) {
+    this.setState(prev => ({
+      ...prev,
+      ...rest,
+      ad: {
+        ...prev.ad,
+        ...props,
+      }
+    }))
+  }
+
   handleFormSubmit = (e) => {
     e.preventDefault();
     this.props.dispatch(createAd(this.state.ad));
@@ -96,11 +107,12 @@ export default class CreateAdModalView extends React.Component {
       .then(({ value }) => {
         const { data } = value;
         const source = (data.uploaded && data.uploaded.filename) || data.filename;
+        const type = getMediaTypeByFileExtension(MEDIA_TYPES, getFileExtension(source));
 
-        this.setState(prevState => ({
-          ...prevState,
-          ad: { ...prevState.ad, source }
-        }));
+        this.setAdProps({
+          source,
+          type
+        })
       });
 
   };
@@ -119,25 +131,20 @@ export default class CreateAdModalView extends React.Component {
     })
   };
 
-  onSourceItemClick = (src) => {
-    const chunks = src.split('.');
-    const ext = chunks[chunks.length-1];
-    let { type } = this.state.ad;
-    for (let _type in MEDIA_TYPES) {
-      if (MEDIA_TYPES[_type].includes(ext)) {
-        type = _type;
-        break;
-      }
+  onSourceItemClick = (source, shouldDelete) => {
+    if (shouldDelete) {
+      this.props.dispatch(deleteAdSource({ filename: source }));
+      return;
     }
-    this.setState({
-      ...this.state,
-      ad: {
-        ...this.state.ad,
-        type: type,
-        source: src,
-      },
-      showItemPicker: false,
-    });
+
+    const { type: initialType } = this.state.ad;
+    const ext = getFileExtension(source);
+    const type = getMediaTypeByFileExtension(MEDIA_TYPES, ext) || initialType;
+
+    this.setAdProps(
+      { source, type },
+      { showItemPicker: false }
+    )
   };
 
   onAdValueChange = (e) => {
@@ -159,7 +166,6 @@ export default class CreateAdModalView extends React.Component {
 
     return <ModalView { ...rest }>
 
-      { !!media.fetched ?
         <ItemPickerModal
           title={translate('pick-a-source')}
           isOpen={ showItemPicker }
@@ -167,7 +173,9 @@ export default class CreateAdModalView extends React.Component {
 
           onItemClick={ this.onSourceItemClick }
           ItemConstructor={ SrcItem }
-          items={ media.files } /> : null }
+          items={ media.files }
+          translate={translate}
+          />
 
       <form method='post' class='ia-create-ad-form'
         onSubmit={ this.handleFormSubmit }>
@@ -265,3 +273,15 @@ export default class CreateAdModalView extends React.Component {
 CreateAdModalView.propTypes = {
   onAdCreated: PropTypes.func.isRequired,
 };
+
+function getFileExtension(str) {
+  if (str) {
+    const [match] = str.match(/\.\w{2,4}/) || [];
+
+    return match ? match.replace(/\./, '') : str;
+  }
+}
+
+function getMediaTypeByFileExtension(types, extension) {
+  return Object.keys(types).find(key => types[key].includes(extension));
+}
