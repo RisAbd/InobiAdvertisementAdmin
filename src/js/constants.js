@@ -23,7 +23,8 @@ export const URL = {
   uploads:              HOST + '/v1/uploads/',
   thumbnail_uploads:    HOST + '/v1/uploads/thumbnail/',
   views:                HOST + '/v1/admin/list/views',
-
+  upload_files:         HOST + '/v2/admin/upload_file',
+  delete_upload:        HOST + '/v1/admin/delete_upload',
   listUploads:          HOST + '/v1/admin/list_uploads/',
 
   stats:                HOST + '/v1/admin/stats',
