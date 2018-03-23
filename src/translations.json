@@ -74,6 +74,11 @@
     "Дни",
     "روزها"
   ],
+  "delete-mode": [
+    "Delete mode",
+    "Режим удаления",
+    "حالت را حذف کنید"
+  ],
   "description": [
     "Description",
     "Описание",
