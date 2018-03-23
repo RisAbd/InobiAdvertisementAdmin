@@ -61,3 +61,10 @@ export function uploadAdSource(data) {
     payload: fetch(`${URL.upload_files}?jwt=${jwt}`, data, 'POST', true)
   };
 }
+
+export function deleteAdSource(data) {
+  return {
+    type: 'DELETE_AD_SOURCE',
+    payload: fetch(URL.delete_upload, data)
+  }
+}
