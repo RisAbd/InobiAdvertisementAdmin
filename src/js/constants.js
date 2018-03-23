@@ -2,7 +2,8 @@ const { protocol, hostname } = window.location;
 const PORT = 5000;
 
 // export const MEDIA_HOST = 'http://176.123.244.5';
-const BASE_URL = 'http://transport.inobi.kg:5010';
+export const BASE_URL = 'http://localhost:5000';
+// const BASE_URL = 'http://transport.inobi.kg:5010';
 export const MEDIA_HOST = `${BASE_URL}/advertisement`;
 export const HOST = MEDIA_HOST;
 
