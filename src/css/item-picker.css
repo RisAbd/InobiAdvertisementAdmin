@@ -1,24 +1,79 @@
-
 .ia-item-picker {
   min-width: 210px;
+  display: flex;
+  flex-flow: column wrap;
+}
 
+.ia-item-picker__switcher {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 8px;
+}
+
+.ia-item-picker__switcher-label {
+  font-size: 14px;
+}
+
+.ia-item-picker__list {
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
 }
 
 .ia-item-picker__item {
+  position: relative;
   width: 60px;
   height: 60px;
   margin: 3px;
 
   text-align: center;
   background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.ia-item-picker__item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right:0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: all 200ms ease;
+}
+
+.ia-item-picker__item::after {
+  content: '\D7';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 42px;
+  line-height: 1;
+  color: white;
+  transform: translate(-50%, -50%);
+}
+.ia-item-picker__item::before,
+.ia-item-picker__item::after {
+  display: none;
+  opacity: 0;
 }
 
 .ia-item-picker__item:active {
   background: rgba(255, 255, 255, 0.2);
   border-color: white;
+}
+
+.ia-item-picker__list.deletable .ia-item-picker__item::before,
+.ia-item-picker__list.deletable .ia-item-picker__item::after {
+  display: block;
+}
+
+.ia-item-picker__list.deletable .ia-item-picker__item:hover::before,
+.ia-item-picker__list.deletable .ia-item-picker__item:hover::after {
+  opacity: 1;
 }
 
 .ia-item-picker__item__selected {

@@ -122,12 +122,14 @@ export default class Ads extends React.Component {
           { isFetching && <Spinner centered height='100px' width='100px' /> }
           <CreateAdButton handler={ this.openCreateAd } />
         </div>
-        <CreateAdModalView
-          title={translate('ads-modal-title')}
-          isOpen={ isOnAdCreate }
-          onCloseClick={ this.onCreateAdClose }
-          onAdCreated={ this.onAdCreated }
-        />
+        { isOnAdCreate && (
+          <CreateAdModalView
+            title={translate('ads-modal-title')}
+            isOpen={true}
+            onCloseClick={ this.onCreateAdClose }
+            onAdCreated={ this.onAdCreated }
+          />
+        )}
       </div>
     );
   }

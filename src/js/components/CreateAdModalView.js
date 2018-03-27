@@ -14,9 +14,11 @@ import ErrorMessage from './MessageView/HTTPError';
 import SuccessMessage from './MessageView/Success';
 import Spinner from './LoadingIndicator';
 
+import { FileInput } from './FileInput'
+
 import { INTERVAL, MEDIA_TYPES } from '../constants';
 import { fetchList } from '../actions/mediaActions';
-import { setCreateAdReset, createAd } from '../actions/adsActions';
+import { setCreateAdReset, createAd, uploadAdSource, deleteAdSource } from '../actions/adsActions';
 
 import { timeout } from '../utils';
 
@@ -79,9 +81,40 @@ export default class CreateAdModalView extends React.Component {
     }
   }
 
+  setAdProps(props, rest = {}) {
+    this.setState(prev => ({
+      ...prev,
+      ...rest,
+      ad: {
+        ...prev.ad,
+        ...props,
+      }
+    }))
+  }
+
   handleFormSubmit = (e) => {
     e.preventDefault();
     this.props.dispatch(createAd(this.state.ad));
+  };
+
+  handleFileUpload = file => {
+    const data = new FormData();
+
+    data.append('file', file);
+    data.append('thumbnail', file);
+
+    this.props.dispatch(uploadAdSource(data))
+      .then(({ value }) => {
+        const { data } = value;
+        const source = (data.uploaded && data.uploaded.filename) || data.filename;
+        const type = getMediaTypeByFileExtension(MEDIA_TYPES, getFileExtension(source));
+
+        this.setAdProps({
+          source,
+          type
+        })
+      });
+
   };
 
   onPickSourceButtonClick = (e) => {
@@ -98,25 +131,20 @@ export default class CreateAdModalView extends React.Component {
     })
   };
 
-  onSourceItemClick = (src) => {
-    const chunks = src.split('.');
-    const ext = chunks[chunks.length-1];
-    let { type } = this.state.ad;
-    for (let _type in MEDIA_TYPES) {
-      if (MEDIA_TYPES[_type].includes(ext)) {
-        type = _type;
-        break;
-      }
+  onSourceItemClick = (source, shouldDelete) => {
+    if (shouldDelete) {
+      this.props.dispatch(deleteAdSource({ filename: source }));
+      return;
     }
-    this.setState({
-      ...this.state,
-      ad: {
-        ...this.state.ad,
-        type: type,
-        source: src,
-      },
-      showItemPicker: false,
-    });
+
+    const { type: initialType } = this.state.ad;
+    const ext = getFileExtension(source);
+    const type = getMediaTypeByFileExtension(MEDIA_TYPES, ext) || initialType;
+
+    this.setAdProps(
+      { source, type },
+      { showItemPicker: false }
+    )
   };
 
   onAdValueChange = (e) => {
@@ -138,7 +166,6 @@ export default class CreateAdModalView extends React.Component {
 
     return <ModalView { ...rest }>
 
-      { !!media.fetched ?
         <ItemPickerModal
           title={translate('pick-a-source')}
           isOpen={ showItemPicker }
@@ -146,7 +173,9 @@ export default class CreateAdModalView extends React.Component {
 
           onItemClick={ this.onSourceItemClick }
           ItemConstructor={ SrcItem }
-          items={ media.files } /> : null }
+          items={ media.files }
+          translate={translate}
+          />
 
       <form method='post' class='ia-create-ad-form'
         onSubmit={ this.handleFormSubmit }>
@@ -156,10 +185,27 @@ export default class CreateAdModalView extends React.Component {
 
         { create.isPosting ? <Spinner centered width='80px' height='80px' withShim />  : null }
 
-        <div class='ia-create-ad-form__single-field'
-          style={{display: 'flex', justifyContent: 'center', margin: '5px 0'}}>
-          <Thumbnail dir={ dir } src={ ad.source || null } type={ ad.type }
-          onClick={ this.onPickSourceButtonClick } />
+        <div class='ia-create-ad-form__single-field'>
+          <h5>
+            { translate('upload-source') }
+          </h5>
+          <div className="ia-create-ad-form__source-picker">
+            <Thumbnail
+              dir={ dir }
+              src={ ad.source }
+              type={ ad.type }
+            />
+            <div className="ia-create-ad-form__source-picker-btns">
+              <FileInput
+                placeholder={translate('upload-file-placeholder')}
+                btnText={translate('upload-file-btn')}
+                onChange={this.handleFileUpload}
+              />
+              <button type="button" onClick={this.onPickSourceButtonClick}>
+                { translate('choose-from-list') }
+              </button>
+            </div>
+          </div>
         </div>
 
         <input type='text' name='source'
@@ -227,3 +273,15 @@ export default class CreateAdModalView extends React.Component {
 CreateAdModalView.propTypes = {
   onAdCreated: PropTypes.func.isRequired,
 };
+
+function getFileExtension(str) {
+  if (str) {
+    const [match] = str.match(/\.\w{2,4}/) || [];
+
+    return match ? match.replace(/\./, '') : str;
+  }
+}
+
+function getMediaTypeByFileExtension(types, extension) {
+  return Object.keys(types).find(key => types[key].includes(extension));
+}

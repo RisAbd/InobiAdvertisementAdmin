@@ -52,3 +52,19 @@ export function disableAd(ad, del=false) {
     payload: fetch(URL.disableAd, { ad_id: ad.id, delete: del }, 'POST'),
   }
 }
+
+export function uploadAdSource(data) {
+  const { jwt } = localStorage;
+
+  return {
+    type: 'UPLOAD_AD_SOURCE',
+    payload: fetch(`${URL.upload_files}?jwt=${jwt}`, data, 'POST', true)
+  };
+}
+
+export function deleteAdSource(data) {
+  return {
+    type: 'DELETE_AD_SOURCE',
+    payload: fetch(URL.delete_upload, data)
+  }
+}

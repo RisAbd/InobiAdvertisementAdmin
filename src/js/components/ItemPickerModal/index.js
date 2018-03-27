@@ -3,30 +3,16 @@ import PropTypes from 'prop-types';
 
 import ModalView from '../ModalView';
 import ItemAdder from './ItemAdder';
+import {Switch} from "../Switch";
 
 const tag = '@ItemPicker';
 
 
 export default class ItemPickerModal extends React.Component {
-
-  handleItemClick = (item, position, component) => {
-    const { onItemClick } = this.props;
-    onItemClick(item, position, component);
-  };
-
-  /*constructor({ items, ItemConstructor, ...rest }) {
-    super();
-    const children = items.map((item, i) => <ItemConstructor
-      onClick={ this.handleItemClick } model={ item } position={ i } key={ i } />);
-    this.state = {
-      items,
-      children,
-    };
-  }*/
-
   state = {
     items: null,
     children: null,
+    deleteMode: false,
   };
 
   componentWillReceiveProps({ items, ItemConstructor, ...rest }) {
@@ -37,6 +23,13 @@ export default class ItemPickerModal extends React.Component {
       children,
     });
   }
+
+  handleItemClick = (item) => {
+    const { onItemClick } = this.props;
+    const { deleteMode: shouldDeleteSource } = this.state;
+
+    onItemClick(item, shouldDeleteSource);
+  };
 
   newItemHandler = (newItem) => {
     const { ItemConstructor } = this.props;
@@ -53,15 +46,27 @@ export default class ItemPickerModal extends React.Component {
           onClick={ this.handleItemClick } model={ newItem } position={ length } key={ length } />
       ],
     });
-  }
+  };
+
+  handleSwitch = () => {
+    this.setState(prevState => ({ deleteMode: !prevState.deleteMode }));
+  };
 
   render() {
-    const { items, ItemConstructor, ...modalProps } = this.props;
-    const { children } = this.state;
+    const { items, ItemConstructor, translate, ...modalProps } = this.props;
+    const { children, deleteMode } = this.state;
     const itemAdder = null; // <ItemAdder ItemConstructor={ ItemConstructor } newItemHandler={ this.newItemHandler } />
     return <ModalView { ...modalProps }>
       <div class='ia-item-picker'>
-        { children }
+        <div className='ia-item-picker__switcher'>
+          <span className='ia-item-picker__switcher-label'>
+            { translate('delete-mode') }
+          </span>
+          <Switch onChange={this.handleSwitch} checked={deleteMode}/>
+        </div>
+        <div className={`ia-item-picker__list ${deleteMode && 'deletable'}`}>
+          { children }
+        </div>
       </div>
       { itemAdder }
     </ModalView>;

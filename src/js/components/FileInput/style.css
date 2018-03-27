@@ -1,0 +1,63 @@
+.c-file-input {
+  width: auto;
+  max-height: 35px;
+}
+.c-file-input > input[type='file'] {
+  display: none;
+}
+.c-file-input > button {
+  background: #fff;
+  border: 1px solid #adadad;
+  border-radius: 6px 0 0 6px;
+  max-width: 105px;
+  outline: none;
+  padding: 6px 12px 6px 6px;
+  vertical-align: middle;
+}
+.c-file-input > button:hover {
+  cursor: pointer;
+}
+.c-file-input > input[type='text'].c-file-input-text {
+  border: 1px solid #adadad;
+  border-radius: 0 6px 6px 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  left: -6px;
+  padding: 6px;
+  position: relative;
+  vertical-align: middle;
+}
+.c-file-input > input[type='text'].c-file-input-text:focus {
+  outline: none;
+}
+.c-file-input > span.c-file-input-cancel {
+  color: #adadad;
+  display: inline-block;
+  font-size: 6pt;
+  height: 10px;
+  text-align: center;
+  width: 10px;
+}
+.c-file-input > span.c-file-input-cancel.hide-cancel {
+  display: none;
+}
+.c-file-input > span.c-file-input-cancel:hover {
+  cursor: pointer;
+}
+.c-file-input > span.c-file-input-error {
+  display: block;
+}
+.c-file-input.disabled {
+  opacity: .4;
+}
+.c-file-input.disabled input,
+.c-file-input.disabled button {
+  cursor: not-allowed;
+}
+.c-file-input.disabled button:hover {
+  background: initial;
+}
+.c-file-input:hover > button {
+  background: #e6e6e6;
+}
