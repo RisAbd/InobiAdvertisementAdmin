@@ -71,7 +71,7 @@ export default class Ads extends React.Component {
 
   renderAds() {
     const { ads  } = this.props;
-    console.log(this.props.ads);
+    
     const { currentRadioFilter } = this.state;
 
     return ads
