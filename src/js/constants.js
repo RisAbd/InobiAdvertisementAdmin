@@ -2,8 +2,15 @@ const { protocol, hostname } = window.location;
 const PORT = 5000;
 
 // export const MEDIA_HOST = 'http://176.123.244.5';
-export const BASE_URL = 'http://localhost:5000';
-// const BASE_URL = 'http://transport.inobi.kg:5010';
+
+// prod server
+const THE_BASE_URL = 'http://transport.inobi.kg:5000';
+
+// prod Iran server
+// const THE_BASE_URL = 'http://transport.inobi.kg:5010';
+
+const BASE_URL = localStorage.getItem('BASE_URL') || THE_BASE_URL;
+
 export const MEDIA_HOST = `${BASE_URL}/advertisement`;
 export const HOST = MEDIA_HOST;
 
