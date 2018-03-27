@@ -96,6 +96,14 @@ export default function reducer(state=initState, action) {
         ads: [...state.ads.filter(ad => ad.id !== updatedAd.id), updatedAd],
         isFetching: false,
       }
+    case 'DELETE_AD_OK':
+      const deleted_id = action.payload.data.disabled_ad.id;
+      return {
+        ...state,
+        ads: [
+          ...state.ads.filter(ad => ad.id !== deleted_id)
+        ]
+      }
     default:
       return state;
   }
