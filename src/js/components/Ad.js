@@ -35,8 +35,7 @@ export default class Ad extends React.Component {
   };
 
   onIdClick = (event) => {
-    const { innerHTML } = event.target;
-    window.prompt('Copy Identifier: Ctrl + C, Enter', innerHTML);
+    window.prompt('Copy Identifier: Ctrl + C, Enter', this.props.ad.id);
   };
 
   render() {
@@ -46,7 +45,7 @@ export default class Ad extends React.Component {
       <div class='ia-ad'>
         <AdThumbnailImage src={ ad.source } type={ ad.type }>
           <span className="ia-ad__badge ia-ad__badge--alpha">
-            { translate('duration')}: { ad.duration }s
+            { translate('duration')}: { ad.duration }<span onClick={ this.onIdClick }>s</span>
           </span>
         </AdThumbnailImage>
         <div class='ia-ad__info'>
@@ -92,6 +91,7 @@ export default class Ad extends React.Component {
               onChange={this.onEnableButtonClick}
               checked={ad.enabled}
             />
+            <button onClick={ this.onDeleteButtonClick } style={ { display: 'none' } }>delete</button>
           </div>
 
         </div>
