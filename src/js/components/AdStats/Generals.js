@@ -39,7 +39,7 @@ export default class Generals extends React.Component {
     ];
     const redirectRow = [
       translate('redirect'),
-      Object.keys(redirect).length === 0 ? '-' : `about ${mround(redirect.ratio, 0)}%`,
+      Object.keys(redirect).length === 0 ? '-' : '100%', //`about ${mround(redirect.ratio, 0)}%`,
     ];
     const REDIRECT_TO_MAX_LENGTH = 35;
     const redirectToString = set(ads.map((ad, i) => ad.redirect_url)).join(', ');
