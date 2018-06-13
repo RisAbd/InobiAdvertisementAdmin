@@ -4,8 +4,6 @@
   "description": "",
   "main": "client.js",
   "scripts": {
-    "init_babel": "npm install -S babel-core babel-loader babel-plugin-add-module-exports babel-plugin-react-html-attrs babel-plugin-transform-class-properties babel-plugin-transform-decorators-legacy babel-preset-es2015 babel-preset-react babel-preset-stage-0",
-    "init": "npm run init_babel && npm install -S react-redux history react-router axios react react-dom redux redux-logger redux-promise-middleware redux-thunk webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --content-base src --inline --hot --host 0.0.0.0",
     "build": "NODE_ENV=production webpack -p"
