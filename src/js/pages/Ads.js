@@ -33,7 +33,7 @@ export default class Ads extends React.Component {
 
   state = {
     isOnAdCreate: false,
-    currentRadioFilter: RADIO_FILTERS.ALL,
+    currentRadioFilter: RADIO_FILTERS.ENABLED,
   };
 
   componentWillMount() {
@@ -53,6 +53,10 @@ export default class Ads extends React.Component {
       isOnAdCreate: false,
     })
   };
+
+  onRefresh = (e) => {
+    this.props.dispatch(fetchAds());
+  }
 
   openCreateAd = () => {
     this.setState({
@@ -117,6 +121,8 @@ export default class Ads extends React.Component {
               active={currentRadioFilter}
               onChange={this.onRadioChange}
             />
+            <h3>Actions</h3>
+            <button onClick={ this.onRefresh }>Refresh</button>
           </div>
 
           { isFetching && <Spinner centered height='100px' width='100px' /> }
