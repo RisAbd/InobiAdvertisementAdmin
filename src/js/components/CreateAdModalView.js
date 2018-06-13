@@ -42,6 +42,8 @@ export default class CreateAdModalView extends React.Component {
       duration: 8,
       type: 'unknown',
       source: null,
+      transport_filters: '',
+      views_max: '',
     },
     showItemPicker: false,
     dir: 'temp',
@@ -94,7 +96,24 @@ export default class CreateAdModalView extends React.Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    this.props.dispatch(createAd(this.state.ad));
+
+    let tf = this.state.ad.transport_filters;
+
+    if (tf.trim() === '') {
+      tf = null;
+    } else {
+      tf = tf.split(',').map(ch => ch.trim())
+    }
+
+    const views_max = parseInt(this.state.ad.views_max) || null;
+
+    const ad = { 
+      ...this.state.ad, 
+      transport_filters: tf,
+      views_max: views_max,
+    };
+
+    this.props.dispatch(createAd(ad));
   };
 
   handleFileUpload = file => {
@@ -259,6 +278,23 @@ export default class CreateAdModalView extends React.Component {
             value={ ad.redirect_url || '' }
             onChange={ this.onAdValueChange }
             placeholder='example.com' />
+        </div>
+
+        <div class='ia-create-ad-form__single-field'>
+          <label to='transport_filters'>Transport Filters: </label>
+          <input type='text' name='transport_filters'
+            value={ ad.transport_filters || '' }
+            onChange={ this.onAdValueChange }
+            placeholder='126,bus' />
+        </div>
+
+
+        <div class='ia-create-ad-form__single-field'>
+          <label to='views_max'>Views max: </label>
+          <input type='number' name='views_max'
+            value={ ad.views_max || '' }
+            onChange={ this.onAdValueChange }
+            placeholder='9000' />
         </div>
 
         <div class='ia-create-ad-form__single-field'>

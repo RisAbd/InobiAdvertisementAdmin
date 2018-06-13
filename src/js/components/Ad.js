@@ -65,12 +65,18 @@ export default class Ad extends React.Component {
               </span>
             </div>
             <div class='ia-ad__info-description'>
-              <p class='ia-ad__info-text'>
-                { translate('views') }: { ad.views }
+              { ad.transport_filters 
+                ? <p class='ia-ad__info-text'>
+                    { 'Filters: ' + JSON.stringify(ad.transport_filters) }
+                </p>
+                : null }
+              <p class='ia-ad__info-text'
+                title={ `${ translate('requests') }: ${ ad.requests }` }>
+                { translate('views') }: { ad.views }{ ad.views_max ? ` (limit ${ad.views_max})` : '' }
               </p>
-              <p class='ia-ad__info-text'>
+              {/*<p class='ia-ad__info-text'>
                 { translate('requests') }: { ad.requests }<br/>
-              </p>
+              </p>*/}
               <p class='ia-ad__info-text'>
                 { translate('weight')}: { ad.weight }
               </p>
